@@ -28,12 +28,12 @@
 
 (defun check-vk-result (result)
   (case result
-    (#.+SUCCESS+ (values))
-    (#.+NOT-READY+   (warn "A fence or query has not yet completed.") (values))
-    (#.+TIMEOUT+     (warn "A wait operation has not completed in the specified time.") (values))
-    (#.+EVENT-SET+   (format *error-output* "An event is signaled.") (values))
-    (#.+EVENT-RESET+ (format *error-output* "An even is unsignaled.") (values))
-    (#.+INCOMPLETE+  (warn "A return array was too small for the result.") (values))
+    (#.+SUCCESS+ result)
+    (#.+NOT-READY+   (warn "A fence or query has not yet completed.") result)
+    (#.+TIMEOUT+     (warn "A wait operation has not completed in the specified time.") result)
+    (#.+EVENT-SET+   (format *error-output* "An event is signaled.") result)
+    (#.+EVENT-RESET+ (format *error-output* "An even is unsignaled.") result)
+    (#.+INCOMPLETE+  (warn "A return array was too small for the result.") result)
 
     (#.+ERROR-OUT-OF-HOST-MEMORY+
      (error "A host memory allocation has failed."))
@@ -64,7 +64,7 @@
     (#.+ERROR-NATIVE-WINDOW-IN-USE-KHR+
      (error "KHR-surface: ERROR-NATIVE-WINDOW-IN-USE"))
     (#.+SUBOPTIMAL-KHR+
-     (warn "KHR-swapchain: SUBOPTIMAL-KHR") (values))
+     (warn "KHR-swapchain: SUBOPTIMAL-KHR") result)
     (#.+ERROR-OUT-OF-DATE-KHR+
      (error "KHR-swapchain: ERROR-OUT-OF-DATE-KHR"))
     (#.+ERROR-INCOMPATIBLE-DISPLAY-KHR+
