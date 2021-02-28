@@ -1,6 +1,6 @@
 * Vkvk 
-- *common lisp bind vulkan with cffi
-- *the %vk package is merge from https://github.com/awolven/cl-vulkan.git
+- common lisp bind vulkan with cffi
+- the %vk package is merge from https://github.com/awolven/cl-vulkan.git
 
 ** Usage
 update later
