@@ -45,26 +45,25 @@
 			   (p-swapchain 'VkSwapchainKHR)
 			   (p-indices :uint32 indices-count))
       (dotimes (i indices-count)
-	(setf (mem-aref p-indices :int32)
-	      (nth i indices)))
+	(setf (mem-aref p-indices :int32) (nth i indices)))
       (setf (mem-ref p-info '(:struct VkSwapchainCreateInfoKHR))
 	    (list :sType +structure-type-swapchain-create-info-khr+
-		:pNext next 
-		:flags flags
-		:surface surface
-		:minImageCount min-image-count
-		:imageFormat format 
-		:imageColorSpace color-space
-		:imageArrayLayers image-array-layers
-		:imageUsage usage
-		:imageSharingMode sharing-mode
-		:queueFamilyIndexCount indices-count
-		:pQueueFamilyIndices p-indices
-		:preTransform pretransform
-		:compositeAlpha composite-alpha
-		:presentMode present-mode
-		:clipped clipped
-		:oldSwapchain old-swapchain))
+		  :pNext next 
+		  :flags flags
+		  :surface surface
+		  :minImageCount min-image-count
+		  :imageFormat format 
+		  :imageColorSpace color-space
+		  :imageArrayLayers image-array-layers
+		  :imageUsage usage
+		  :imageSharingMode sharing-mode
+		  :queueFamilyIndexCount indices-count
+		  :pQueueFamilyIndices (set-null-ptr indices p-indices)
+		  :preTransform pretransform
+		  :compositeAlpha composite-alpha
+		  :presentMode present-mode
+		  :clipped clipped
+		  :oldSwapchain old-swapchain))
       (setf (mem-aref (foreign-slot-pointer p-info '(:struct VkSwapchainCreateInfoKHR) :imageExtent)
 		      '(:struct VkExtent2D))
 	    (list :width image-width :height image-height))
